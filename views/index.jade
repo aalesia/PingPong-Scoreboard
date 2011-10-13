@@ -1,0 +1,36 @@
+!!!5
+html
+    head
+        title Pong Scoreboard
+        script(src='/socket.io/socket.io.js')
+        script(src="/js/underscore.min.js")
+        script(src="/js/jquery.min.js")
+        script(src="/js/backbone.min.js")
+        script(src="/js/json2.js")
+        script(src="/js/ICanHaz.min.js")
+        script(src='/js/scoreboard.js')
+        script(type='text/javascript')
+            $(document).ready(function() {
+                window.renderScoreboard(!{JSON.stringify(players)});
+            });
+
+        script#player(type='text/html')
+            td
+                {{ rank }}
+            td
+                {{ name }}
+            td
+                {{ score }}
+            td
+                {{ games_played }}
+    body
+        table#scoreboard
+            tr
+                td
+                    | Rank
+                td
+                    | Player
+                td
+                    | Score
+                td
+                    | Games Played

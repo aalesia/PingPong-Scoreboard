@@ -1,0 +1,51 @@
+!!!5
+html
+	head
+		title Players
+		script(src="/js/jquery-1.7.min.js")
+		script(src="/js/jquery.md5.js")
+		link(type="text/css", rel="stylesheet", href="/css/main.css")
+		script(src="/js/main.js")
+		script(src="/socket.io/socket.io.js")
+		script
+			var socket = io.connect('http://localhost');
+			socket.on('new_player',function(player){
+				$('#players').first().append('<div class="player" id='+player._id+'>'+player.email+'</div>')
+			});
+	body
+		div
+			div#players
+				each player in players
+					div.player_container(draggable='true')
+						img.avatar(src='http://www.gravatar.com/avatar/#{player.hash}')
+						div.player_name
+							| #{player.name}
+						div.id(hidden = 'true')
+							| #{player.id}
+						div.email(hidden = 'true')
+							| #{player.email}
+					br
+		
+			form(name='player', action='/player', method='post')
+				div
+					| Username:
+					input(name='name')
+				div
+					| Email:
+					input(name='email', type='email')
+				div
+					input(type='submit', name='submit', value='Submit')
+
+		div
+			div#current_game
+				
+
+//		form(name='game', action='/game', method='post')
+//			div.player_input_field
+//				| Winner:
+//				input(name='winner')
+//			div.player_input_field
+//				| Loser:
+//				input(name='loser')
+//			div
+//				input(type='submit', name='submit', value='Submit')

@@ -1,0 +1,89 @@
+html
+	head
+		title VOKAL Leaderboard
+		script(src="/js/jquery-1.7.min.js")
+		script(src="/js/jquery.md5.js")
+		link(type="text/css", rel="stylesheet", href="/css/main.css")
+		script(src="/js/main.js")
+		script(src="/socket.io/socket.io.js")
+		script(src="/js/ICanHaz.min.js")
+		script(src="/js/jquery.alerts-1.1/jquery.alerts.js")
+		link(type="text/css", rel="stylesheet", href="/js/jquery.alerts-1.1/jquery.alerts.css")
+		script#playerScore(type="text/html")
+			tr.player
+				td
+					{{rank}} 
+				td
+					{{name}} 
+				td
+					{{wins}}
+		script#playerList(type="text/html")
+			div.player_container(draggable='true')
+						img.avatar(src='http://www.gravatar.com/avatar/{{hash}}')
+						div.player_name
+							{{name}}
+						div.id(hidden = 'true')
+							{{id}}
+						div.email(hidden = 'true')
+							{{email}}
+					br
+		script
+			var socket = io.connect('http://localhost');
+			socket.on('leaderboard_update',function(leaderboard){
+				$('.player').remove();
+				$.each(leaderboard, function(index, player) {
+					$('#leaderboard').append(ich.playerScore(player))
+				});
+			});
+			socket.on('new_player',function(player){
+				$('#players').first().append(ich.playerList(player));
+			});
+	body
+		table#main_table
+			colgroup
+				col(span="3")
+			tr
+				td.col_left
+					div#players
+						each player in players
+							div.player_container(draggable='true')
+								img.avatar(src='http://www.gravatar.com/avatar/#{player.hash}')
+								div.player_name
+									| #{player.name}
+								div.id(hidden = 'true')
+									| #{player.id}
+								div.email(hidden = 'true')
+									| #{player.email}
+							br
+		
+					form(name='player', action='/player', method='post')
+						div
+							| Username:
+							input(name='name')
+						div
+							| Email:
+							input(name='email', type='email')
+						div
+							input(type='submit', name='submit', value='Submit')
+
+				td#current_game.col_center
+
+				td.col_right
+					table#leaderboard
+						colgroup
+							col.column(span="3")
+							tr
+								th
+									| Rank
+								th
+									| Player
+								th
+									| Wins
+						each player in leaderboard
+							tr.player
+								td
+									| #{player.rank}
+								td
+									| #{player.name}
+								td
+									| #{player.wins}

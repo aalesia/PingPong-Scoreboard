@@ -1,0 +1,86 @@
+.player {
+	font-size: 14;
+	color: red;
+	max-width:100px;
+}
+
+.player_name {
+	text-align: center;
+}
+
+.player_container {
+	height: 110px;
+	width: 110px;
+	background-color: white;
+	border: 2px solid green;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#main_table {
+	width: 100%;
+	
+}
+
+.col_left {
+	width: 25%;
+	top: 0px;
+	left: 0px;
+	float: left;
+	position: absolute;
+}
+
+.col_center {
+	width: 50%;
+	top: 0px;
+	margin-left:auto;
+	margin-right:auto;
+	float: center;
+	text-align: center;
+}
+
+.col_right {
+	width: 25%;
+	top: 0px;
+	right: 0px;
+	float: right;
+	position: absolute;
+}
+
+.column {
+	width: 33.3%;
+}
+
+.player td {
+	text-align: center;
+}
+
+.vs {
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 70px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#current_game {
+	background-image: url(../images/Ping-Pong-Table.jpg);
+	background-position: 30% -60%, 0 0;
+	background-repeat: no-repeat;
+	width: 70%;
+	height: 800px;
+}
+
+.remove_player {
+	width: 50px;
+	height: 50px;
+}
+
+p {
+    column-count: 3;
+    column-rule: 1em solid black;
+}
+
+br {
+    column-span: all;
+}
